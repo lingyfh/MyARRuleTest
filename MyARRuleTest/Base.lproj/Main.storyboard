@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lGn-iU-w6Y">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="GQQ-4G-giY">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="lGn-iU-w6Y" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="G6G-BL-1tu">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="2Ti-V0-LnF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Uw-qE-jWe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-588" y="134"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rgf-r1-qdQ">
+                                <rect key="frame" x="113" y="296" width="148" height="74"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="74" id="5SN-uo-2Dj"/>
+                                    <constraint firstAttribute="width" constant="148" id="NEL-5A-UXy"/>
+                                </constraints>
+                                <state key="normal" title="Open AR Measure"/>
+                                <connections>
+                                    <segue destination="tc4-YR-D30" kind="push" id="gUA-Pt-Al8"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="rgf-r1-qdQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="XF9-O7-oPx"/>
+                            <constraint firstItem="rgf-r1-qdQ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="zfq-4f-cg9"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="FXG-KV-MrM"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="140" y="133.5832083958021"/>
+        </scene>
+        <!--Measure View Controller-->
+        <scene sceneID="zPH-da-ytV">
+            <objects>
+                <viewController storyboardIdentifier="ARMeasureViewController" id="tc4-YR-D30" customClass="ARMeasureViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Naj-2r-vo2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hbq-jx-af4">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </arscnView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E6y-Kv-d0x">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                <color key="backgroundColor" red="0.18823529410000001" green="0.86274509799999999" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="FhD-d0-lue"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wSn-Fu-OkQ">
+                                <rect key="frame" x="184" y="330" width="6" height="6"/>
+                                <color key="backgroundColor" red="0.18823529410000001" green="0.86274509799999999" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="6" id="HtK-si-stc"/>
+                                    <constraint firstAttribute="height" constant="6" id="Twa-FI-b71"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wSn-Fu-OkQ" firstAttribute="centerY" secondItem="Naj-2r-vo2" secondAttribute="centerY" id="BKF-5Q-maw"/>
+                            <constraint firstItem="hbq-jx-af4" firstAttribute="top" secondItem="Naj-2r-vo2" secondAttribute="top" id="GF4-2I-7My"/>
+                            <constraint firstItem="wSn-Fu-OkQ" firstAttribute="centerX" secondItem="Naj-2r-vo2" secondAttribute="centerX" id="I93-85-o7A"/>
+                            <constraint firstItem="hbq-jx-af4" firstAttribute="bottom" secondItem="LNj-Mv-hls" secondAttribute="bottom" id="OrC-gk-43H"/>
+                            <constraint firstItem="E6y-Kv-d0x" firstAttribute="leading" secondItem="LNj-Mv-hls" secondAttribute="leading" id="RLt-Qd-LI9"/>
+                            <constraint firstItem="hbq-jx-af4" firstAttribute="leading" secondItem="LNj-Mv-hls" secondAttribute="leading" id="ZTc-ij-4M8"/>
+                            <constraint firstItem="E6y-Kv-d0x" firstAttribute="top" secondItem="Naj-2r-vo2" secondAttribute="top" id="f7W-Cd-wXB"/>
+                            <constraint firstItem="E6y-Kv-d0x" firstAttribute="trailing" secondItem="LNj-Mv-hls" secondAttribute="trailing" id="mJB-Kq-dij"/>
+                            <constraint firstItem="hbq-jx-af4" firstAttribute="trailing" secondItem="LNj-Mv-hls" secondAttribute="trailing" id="wc9-iu-MUJ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="LNj-Mv-hls"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="P45-8w-5Hu"/>
+                    <connections>
+                        <outlet property="arSCNView" destination="hbq-jx-af4" id="epP-i6-UnH"/>
+                        <outlet property="measurePoint" destination="wSn-Fu-OkQ" id="gTk-qu-ZgY"/>
+                        <outlet property="resultInfoLabel" destination="E6y-Kv-d0x" id="onI-Hj-kv7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wD1-ym-WRn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="877.60000000000002" y="133.5832083958021"/>
+        </scene>
+    </scenes>
+</document>
