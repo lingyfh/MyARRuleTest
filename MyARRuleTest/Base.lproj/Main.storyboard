@@ -86,9 +86,35 @@
                                     <constraint firstAttribute="height" constant="6" id="Twa-FI-b71"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7w0-AB-It1">
+                                <rect key="frame" x="154" y="617" width="67" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="67" id="CJY-dt-rOT"/>
+                                    <constraint firstAttribute="height" constant="30" id="iQC-uY-7fr"/>
+                                </constraints>
+                                <state key="normal" title="Add Point"/>
+                                <connections>
+                                    <action selector="action2AddPoint:" destination="tc4-YR-D30" eventType="touchUpInside" id="DcF-bQ-1nN"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bUf-Er-BV0">
+                                <rect key="frame" x="237" y="617" width="75" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="4oH-Aq-1kP"/>
+                                    <constraint firstAttribute="height" constant="30" id="dQ6-BG-zFI"/>
+                                </constraints>
+                                <state key="normal" title="Clear Point"/>
+                                <connections>
+                                    <action selector="action2ClearPoint:" destination="tc4-YR-D30" eventType="touchUpInside" id="jSY-0G-2eT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="LNj-Mv-hls" firstAttribute="bottom" secondItem="bUf-Er-BV0" secondAttribute="bottom" constant="20" id="1au-CS-9VD"/>
+                            <constraint firstItem="bUf-Er-BV0" firstAttribute="leading" secondItem="7w0-AB-It1" secondAttribute="trailing" constant="16" id="81Q-hF-UVb"/>
                             <constraint firstItem="wSn-Fu-OkQ" firstAttribute="centerY" secondItem="Naj-2r-vo2" secondAttribute="centerY" id="BKF-5Q-maw"/>
                             <constraint firstItem="hbq-jx-af4" firstAttribute="top" secondItem="Naj-2r-vo2" secondAttribute="top" id="GF4-2I-7My"/>
                             <constraint firstItem="wSn-Fu-OkQ" firstAttribute="centerX" secondItem="Naj-2r-vo2" secondAttribute="centerX" id="I93-85-o7A"/>
@@ -96,7 +122,9 @@
                             <constraint firstItem="E6y-Kv-d0x" firstAttribute="leading" secondItem="LNj-Mv-hls" secondAttribute="leading" id="RLt-Qd-LI9"/>
                             <constraint firstItem="hbq-jx-af4" firstAttribute="leading" secondItem="LNj-Mv-hls" secondAttribute="leading" id="ZTc-ij-4M8"/>
                             <constraint firstItem="E6y-Kv-d0x" firstAttribute="top" secondItem="Naj-2r-vo2" secondAttribute="top" id="f7W-Cd-wXB"/>
+                            <constraint firstItem="LNj-Mv-hls" firstAttribute="bottom" secondItem="7w0-AB-It1" secondAttribute="bottom" constant="20" id="jZz-g7-RIv"/>
                             <constraint firstItem="E6y-Kv-d0x" firstAttribute="trailing" secondItem="LNj-Mv-hls" secondAttribute="trailing" id="mJB-Kq-dij"/>
+                            <constraint firstItem="7w0-AB-It1" firstAttribute="centerX" secondItem="Naj-2r-vo2" secondAttribute="centerX" id="u4f-t8-Aeo"/>
                             <constraint firstItem="hbq-jx-af4" firstAttribute="trailing" secondItem="LNj-Mv-hls" secondAttribute="trailing" id="wc9-iu-MUJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LNj-Mv-hls"/>

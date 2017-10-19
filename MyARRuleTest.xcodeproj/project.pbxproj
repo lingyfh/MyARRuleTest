@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		776031B11F985C9C006C5D92 /* LineNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 776031B01F985C9C006C5D92 /* LineNode.m */; };
+		776031C71F98AFF4006C5D92 /* tron_grid.png in Resources */ = {isa = PBXBuildFile; fileRef = 776031C61F98AFF3006C5D92 /* tron_grid.png */; };
 		77FF1CDE1F95FD4100C482AF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FF1CDD1F95FD4100C482AF /* AppDelegate.m */; };
 		77FF1CE11F95FD4100C482AF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FF1CE01F95FD4100C482AF /* ViewController.m */; };
 		77FF1CE41F95FD4100C482AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77FF1CE21F95FD4100C482AF /* Main.storyboard */; };
@@ -17,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		776031AF1F985C9C006C5D92 /* LineNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LineNode.h; sourceTree = "<group>"; };
+		776031B01F985C9C006C5D92 /* LineNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LineNode.m; sourceTree = "<group>"; };
+		776031C61F98AFF3006C5D92 /* tron_grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tron_grid.png; sourceTree = "<group>"; };
 		77FF1CD91F95FD4100C482AF /* MyARRuleTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyARRuleTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77FF1CDC1F95FD4100C482AF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		77FF1CDD1F95FD4100C482AF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -42,6 +47,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		776031AE1F985C5E006C5D92 /* node */ = {
+			isa = PBXGroup;
+			children = (
+				776031AF1F985C9C006C5D92 /* LineNode.h */,
+				776031B01F985C9C006C5D92 /* LineNode.m */,
+			);
+			path = node;
+			sourceTree = "<group>";
+		};
+		776031C51F98AFBA006C5D92 /* res */ = {
+			isa = PBXGroup;
+			children = (
+				776031C61F98AFF3006C5D92 /* tron_grid.png */,
+			);
+			path = res;
+			sourceTree = "<group>";
+		};
+		776031C81F98DA8A006C5D92 /* category */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = category;
+			sourceTree = "<group>";
+		};
 		77FF1CD01F95FD4100C482AF = {
 			isa = PBXGroup;
 			children = (
@@ -61,6 +90,9 @@
 		77FF1CDB1F95FD4100C482AF /* MyARRuleTest */ = {
 			isa = PBXGroup;
 			children = (
+				776031C81F98DA8A006C5D92 /* category */,
+				776031C51F98AFBA006C5D92 /* res */,
+				776031AE1F985C5E006C5D92 /* node */,
 				77FF1CF21F95FD5000C482AF /* ctrl */,
 				77FF1CDC1F95FD4100C482AF /* AppDelegate.h */,
 				77FF1CDD1F95FD4100C482AF /* AppDelegate.m */,
@@ -142,6 +174,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				776031C71F98AFF4006C5D92 /* tron_grid.png in Resources */,
 				77FF1CE91F95FD4100C482AF /* LaunchScreen.storyboard in Resources */,
 				77FF1CE61F95FD4100C482AF /* Assets.xcassets in Resources */,
 				77FF1CE41F95FD4100C482AF /* Main.storyboard in Resources */,
@@ -159,6 +192,7 @@
 				77FF1CE11F95FD4100C482AF /* ViewController.m in Sources */,
 				77FF1CEC1F95FD4100C482AF /* main.m in Sources */,
 				77FF1CDE1F95FD4100C482AF /* AppDelegate.m in Sources */,
+				776031B11F985C9C006C5D92 /* LineNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
