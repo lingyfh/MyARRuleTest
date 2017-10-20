@@ -28,6 +28,8 @@
     
     NSMutableDictionary *planeNodes;
     NSMutableArray *recentPositions;
+    
+    int dotCount;
 }
 
 @property (weak, nonatomic) IBOutlet ARSCNView *arSCNView;
@@ -60,8 +62,8 @@
     
     [arSession runWithConfiguration:arSessionConfig];
     self.arSCNView.session = arSession;
-    self.arSCNView.debugOptions = ARSCNDebugOptionShowFeaturePoints | ARSCNDebugOptionShowWorldOrigin;
-    
+    self.arSCNView.debugOptions = ARSCNDebugOptionShowFeaturePoints;
+    dotCount = 0;
     [self resetMeasure];
     // Do any additional setup after loading the view.
 }
@@ -106,6 +108,7 @@
     } else if (!measurable && self.measurePoint.tag == 0) {
         return;
     }
+    NSLog(@"mark measurable === %d", measurable);
     [self.measurePoint setTag:measurable ? 1 : 0];
     [self.measurePoint setBackgroundColor:measurable ? [UIColor greenColor] : [UIColor redColor]];
 }
@@ -193,21 +196,41 @@
     return vector;
 }
 
+- (SCNVector3)hitResultPosition {
+    NSArray<ARHitTestResult *> *results = [self.arSCNView hitTest:self.arSCNView.center types:ARHitTestResultTypeFeaturePoint];
+    if ([results count] <= 0) {
+        [self markMeasurable:NO];
+        NSLog(@"hit results count === %d", (int)[results count]);
+        return SCNVector3Zero;
+    }
+    ARHitTestResult *hitResult = [results firstObject];
+    SCNVector3 vector = SCNVector3Make(hitResult.worldTransform.columns[3].x, hitResult.worldTransform.columns[3].x, hitResult.worldTransform.columns[3].x);
+    return vector;
+}
+
 - (void)detectObjects {
+    
+    NSArray<ARHitTestResult *> *results = [self.arSCNView hitTest:self.arSCNView.center types:ARHitTestResultTypeFeaturePoint];
+    
+    if ([results count] <= 0) {
+        [self markMeasurable:NO];
+        NSLog(@"hit results count === %d", (int)[results count]);
+        return;
+    }
+    
+    // NSLog(@"results count === %d", (int)[results count]);
+    
+    [self markMeasurable:YES];
+    
     if (startNode == nil) {
         return;
     }
     startVector = startNode.position;
     
-    NSArray<ARHitTestResult *> *results = [self.arSCNView hitTest:self.arSCNView.center types:ARHitTestResultTypeExistingPlaneUsingExtent];
-    
-    if ([results count] <= 0) {
-        NSLog(@"hit results count === %d", (int)[results count]);
-        return;
-    }
     
     ARHitTestResult *hitResult = [results firstObject];
     SCNVector3 vector = SCNVector3Make(hitResult.worldTransform.columns[3].x, hitResult.worldTransform.columns[3].x, hitResult.worldTransform.columns[3].x);
+    
     
     NSValue *value = [NSValue value:&vector withObjCType:@encode(SCNVector3)];
     [recentPositions addObject:value];
@@ -223,11 +246,9 @@
     // endNode.position = endVector;
     
     [self.resultInfoLabel setText:[NSString stringWithFormat:@"%fcm", distance*100]];
-    NSLog(@"distance === %f", distance);
-    
-    // [self lineBetweenStart:startNode.position end:endVector];
+    // NSLog(@"distance === %f", distance);
+    [self lineBetweenStart:startNode.position end:vector];
     // SCNGeometrySource *source = [SCNGeometrySource geometrySourceWithVertices:@[startVector, endVector] count:2];
-    
 }
 
 - (BOOL)isMatchVector:(SCNVector3)first second:(SCNVector3)second {
@@ -293,7 +314,10 @@
     
     NSArray<ARHitTestResult *> *results = [self.arSCNView hitTest:self.arSCNView.center types:ARHitTestResultTypeFeaturePoint];
     ARHitTestResult *result = [results firstObject];
-    
+    if ([results count] <= 0) {
+        NSLog(@"action2AddPoint hit result is zero");
+        return;
+    }
     SCNVector3 worldPostion = SCNVector3Make(result.worldTransform.columns[3].x, result.worldTransform.columns[3].y, result.worldTransform.columns[3].z);
     
     SCNSphere *dot = [SCNSphere sphereWithRadius:1];
@@ -310,20 +334,8 @@
     } else {
         endNode = pointNode;
         
-//        SCNVector3 positions[] = {startNode.position, endNode.position};
-//        int indices[] = {0, 1};
-//        SCNGeometrySource *source = [SCNGeometrySource geometrySourceWithVertices:positions count:2];
-//
-//        NSData *indexData = [NSData dataWithBytes:indices length:sizeof(indices)];
-//
-//        SCNGeometryElement *element = [SCNGeometryElement geometryElementWithData:indexData primitiveType:SCNGeometryPrimitiveTypeLine primitiveCount:2 bytesPerIndex:sizeof(int)];
-//
-//        SCNGeometry *geometry =  [SCNGeometry geometryWithSources:@[source] elements:@[element]];
-//
-//        SCNNode *lineNode = [SCNNode nodeWithGeometry:geometry];
-//
-//        [self.arSCNView.scene.rootNode addChildNode:lineNode];
-//
+        NSLog(@"end Node position , x = %0.2f, y = %0.2f, z = %0.2f", endNode.position.x, endNode.position.y, endNode.position.z);
+        
         [self lineBetweenStart:startNode.position end:endNode.position];
         
         float distanceX = startNode.position.x - endNode.position.x;
@@ -335,14 +347,30 @@
     }
 }
 
+- (void)addDot:(SCNVector3)position {
+    SCNSphere *dot = [SCNSphere sphereWithRadius:1];
+    dot.firstMaterial.diffuse.contents = [UIColor whiteColor];
+    SCNNode *pointNode = [SCNNode nodeWithGeometry:dot];
+    pointNode.scale = SCNVector3Make(1/400.0, 1/400.0, 1/400.0);
+    pointNode.position = position;
+    
+    [self.arSCNView.scene.rootNode addChildNode:pointNode];
+    [measureNodes addObject:pointNode];
+}
+
 - (void)lineBetweenStart:(SCNVector3)start end:(SCNVector3)end {
     SCNVector3 positions[] = {start, end};
     int indices[] = {0, 1};
+    NSLog(@"======== start x = %0.2f, y = %0.2f, z = %0.2f", start.x, start.y, start.z);
+    NSLog(@"-------- end   x = %0.2f, y = %0.2f, z = %0.2f", end.x, end.y, end.z);
     
     SCNGeometrySource *source = [SCNGeometrySource geometrySourceWithVertices:positions count:2];
     
+    // NSData *sourceData = [NSData dataWithBytes:positions_f length:sizeof(positions_f)];
+//    source = [SCNGeometrySource geometrySourceWithData:sourceData semantic:SCNGeometrySourceSemanticVertex vectorCount:sizeof(positions_f) floatComponents:YES componentsPerVector:3 bytesPerComponent:sizeof(float) dataOffset:0 dataStride:(sizeof(float)) * 3];
+//
     NSData *indexData = [NSData dataWithBytes:indices length:sizeof(indices)];
-    SCNGeometryElement *element = [SCNGeometryElement geometryElementWithData:indexData primitiveType:SCNGeometryPrimitiveTypeLine primitiveCount:2 bytesPerIndex:sizeof(int)];
+    SCNGeometryElement *element = [SCNGeometryElement geometryElementWithData:indexData primitiveType:SCNGeometryPrimitiveTypeLine primitiveCount:1 bytesPerIndex:sizeof(int)];
     
     SCNGeometry *geometry = [SCNGeometry geometryWithSources:@[source] elements:@[element]];
     
@@ -381,6 +409,8 @@
     textNode.position = middelPosition;
     
     [self.arSCNView.scene.rootNode addChildNode:textNode];
+    
+    [measureNodes addObject:textNode];
 }
 
 - (float)distanceBetweenStart:(SCNVector3)start end:(SCNVector3)end {
